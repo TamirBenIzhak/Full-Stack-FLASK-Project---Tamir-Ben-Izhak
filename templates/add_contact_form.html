@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Add Contact{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('view_contacts') }}"><button class="contacts_button">All Contacts List</button></a>
+
+
+<!-- Error message block -->
+{% if error %}
+<div class="error-message">
+    Contact already exists.
+</div>
+{% endif %}
+
+<form class="my-form" id="add-contact-form" action="{{ url_for('add_contact_route') }}" method="POST" enctype="multipart/form-data">
+    <h1>Add Contact Form</h1>
+    <!-- Full Name -->
+    <div>
+        <label for="fullname" id="fullNameLabel">Full Name <br> </label>
+        <input type="text" id="fullname" name="name" required>
+    </div>
+    <br>
+    <!-- Phone Number -->
+    <div>
+        <label for="phone_number" id="PhoneNumberLabel">Phone Number <br></label>
+        <input type="text" name="phone" id="phone_number" required>
+    </div>
+    <br>
+    <!-- Email -->
+    <div>
+        <label for="email" id="EmailLabel">Email Address <br> </label>
+        <input type="email" name="email" id="email" required>
+    </div>
+    <br>
+    <!-- Gender -->
+    <div>
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label>
+    </div>
+    <br>
+    <!-- Photo -->
+    <div>
+        <label for="photo" id="PhotoLabel">Photo <br> </label>
+        <input type="file" name="photo" id="photo" required>
+    </div>
+    <br>
+    <!-- Agreement -->
+    <div>
+        <label for="agree">I Agree:</label>
+        <input type="checkbox" id="agree" name="agree" required>
+    </div>
+    <br>
+    <button class="contacts_button" type="submit">Add Contact</button>
+</form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}View Contacts{% endblock %}
+
+{% block content %}
+<h1>Contacts List</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Photo</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.number }}</td>  
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.email }}</td>
+            <td>
+                <img src="{{ url_for('static', filename='images/' ~ contact.photo) }}" alt="{{ contact.name }}" style="width: 100px;">
+            </td>
+            <td>
+                <!-- Delete Button Form -->
+                <form action="{{ url_for('delete_contact_route', number=contact.number) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                
+
+                <!-- Edit Button -->
+                <a href="{{ url_for('editContact', number=contact.number) }}">
+                    <button type="button">Edit</button>
+                </a>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

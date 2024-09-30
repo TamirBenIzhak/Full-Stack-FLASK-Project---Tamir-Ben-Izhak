@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Contact{% endblock %}
+
+{% block content %}
+<h1>Edit Contact</h1>
+
+<form class="my-form" action="{{ url_for('saveUpdatedContact', number=contact.number) }}" method="POST" enctype="multipart/form-data">    <!-- Name -->
+    <div>
+        <label for="name">Full Name:</label>
+        <input type="text" name="fullname" id="name" value="{{ contact.name }}" required>
+    </div>
+    <!-- Email -->
+     <br>
+    <div>
+        <label for="email">Email Adress:</label>
+        <input type="email" name="email" id="email" value="{{ contact.email }}" required>
+    </div>
+    <!-- Phone -->
+     <br>
+    <div>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" name="phone" id="phone" value="{{ contact.phone }}" required>
+    </div>
+    <br>
+    <!-- Gender -->
+    <div>
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" {% if contact.gender == 'male' %}checked{% endif %}> Male
+        <input type="radio" id="female" name="gender" value="female" {% if contact.gender == 'female' %}checked{% endif %}> Female
+        <input type="radio" id="other" name="gender" value="other" {% if contact.gender == 'other' %}checked{% endif %}> Other
+    </div>
+    
+<br>
+    <!-- Photo -->
+    <div>
+        <label for="photo">Upload a new photo (optional):</label>
+        <input type="file" name="photo" id="photo">
+    </div>
+    <!-- Submit -->
+    <button type="submit" class="contacts_button"><h3>Save Changes</h3></button>
+</form>
+
+
+
+{% endblock %}
