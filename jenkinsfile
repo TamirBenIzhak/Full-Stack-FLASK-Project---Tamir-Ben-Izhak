@@ -17,8 +17,8 @@ pipeline {
                     sh '''
                     kubectl apply -f k8s/mysql-pv.yaml
                     kubectl apply -f k8s/mysql-pvc.yaml
-                    kubectl apply -f k8s/mysql-deployment.yaml
-                    kubectl apply -f k8s/mysql-service.yaml
+                    kubectl apply -f k8s/mysql_deployment.yaml
+                    kubectl apply -f k8s/mysql_service.yaml
                     '''
                 }
             }
