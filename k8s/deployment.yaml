@@ -1,0 +1,11 @@
+env:
+- name: DB_Host
+  value: "mysql-service"
+- name: DB_User
+  value: "root"
+- name: DB_Password
+  value: "admin"
+- name: DB_Port
+  value: "3306"
+- name: DB_Name
+  value: "contacts_app"
