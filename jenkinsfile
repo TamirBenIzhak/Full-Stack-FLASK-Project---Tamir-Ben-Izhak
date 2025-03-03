@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+    environment {
+        AWS_CREDENTIALS = credentials('aws-credentials')
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git credentialsId: 'github-token', url: 'https://github.com/TamirBenIzhak/Full-Stack-FLASK-Project---Tamir-Ben-Izhak.git'
+            }
+        }
+
+        stage('Deploy MySQL to Kubernetes') {
+            steps {
+                script {
+                    sh '''
+                    kubectl apply -f k8s/mysql-pv.yaml
+                    kubectl apply -f k8s/mysql-pvc.yaml
+                    kubectl apply -f k8s/mysql-deployment.yaml
+                    kubectl apply -f k8s/mysql-service.yaml
+                    '''
+                }
+            }
+        }    
+
+        stage('Deploy Flask App to Kubernetes') {
+            steps {
+                script {
+                    sh '''
+                    kubectl apply -f k8s/deployment.yaml
+                    kubectl apply -f k8s/service.yaml
+                    '''
+                }
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                script {
+                    sh '''
+                    kubectl get pods
+                    kubectl get services
+                    '''
+                }
+            }
+        }
+    }
+}
